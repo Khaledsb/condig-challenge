@@ -16,10 +16,17 @@ class CreateNodesTable extends Migration
         Schema::create('nodes', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('graph_id');
+            $table->unsignedBigInteger('graph_id')->nullable();
             $table->foreign('graph_id')->references('id')->on('graphs');
 
+            $table->unsignedBigInteger('parent_node')->nullable();
+            $table->foreign('parent_node')->references('id')->on('nodes');
+
+            $table->unsignedBigInteger('child_node')->nullable();
+            $table->foreign('child_node')->references('id')->on('nodes');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

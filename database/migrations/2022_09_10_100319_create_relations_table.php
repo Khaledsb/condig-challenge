@@ -14,15 +14,8 @@ class CreateRelationsTable extends Migration
     public function up()
     {
         Schema::create('relations', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('parent_node_id');
-            $table->foreign('parent_node_id')->references('id')->on('nodes');
-
-            $table->unsignedBigInteger('child_node_id');
-            $table->foreign('child_node_id')->references('id')->on('nodes');
-    
-            $table->timestamps();
+            $table->foreignId('parent_node_id')->references('id')->on('nodes');
+            $table->foreignId('child_node_id')->references('id')->on('nodes');
         });
     }
 

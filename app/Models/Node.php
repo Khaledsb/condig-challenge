@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Node extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -50,12 +51,44 @@ class Node extends Model
     }
 
     /**
-     * Graph Relationship
+     * child relationship
      *
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function relations()
+    public function childs()
     {
-        return $this->hasMany(Relation::class);
+        return $this->belongsToMany(Node::class, 'relations', 'parent_node_id', 'child_node_id');
     }
+
+    /**
+     * Parent relationship
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function parents()
+    {
+        return $this->belongsToMany(Node::class, 'relations' ,'child_node_id', 'parent_node_id');
+    }
+
+    public function setParent(Node $node)
+    {
+        return $this->parents()->attach($node);
+    }
+
+    public function setChild(Node $node)
+    {
+        return $this->childs()->attach($node);
+    }
+
+    /**
+     * setNode function
+     * @param $graph_id 
+     * @return App\Models\Node
+     */
+    public function setGraph($graph_id)
+    {
+        $this->graph_id = $graph_id;
+        return $this;
+    }
+
 }

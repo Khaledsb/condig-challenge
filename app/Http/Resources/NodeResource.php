@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GraphResource extends JsonResource
+class NodeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,10 @@ class GraphResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
-            'description' => $this->description,
-            'nodes' => NodeResource::collection($this->nodes),
+            'id' => $this->id,
+            'graph_id' => $this->graph_id,
+            'childs' => NodeResource::collection($this->childs),
+            'parents' => NodeResource::collection($this->parents)
         ];
     }
 }
