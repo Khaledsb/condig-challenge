@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Graph extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +29,7 @@ class Graph extends Model
         'id',
         'created_at',
         'updated_at',
+        'deleted_at'
     ];
 
     /**

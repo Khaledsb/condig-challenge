@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('graphs', [\App\Http\Controllers\Api\GraphController::class, 'index'])->name('graph.index');
+Route::post('graph', [\App\Http\Controllers\Api\GraphController::class, 'store'])->name('graph.store');
+Route::post('graph/update/{graph}', [\App\Http\Controllers\Api\GraphController::class, 'update'])->name('graph.update');
+Route::delete('graph/delete/{graph}', [App\Http\Controllers\Api\GraphController::class, 'delete'])->name('graph.delete'); 
