@@ -17,6 +17,7 @@ class GraphResource extends JsonResource
         return [
             'name' => $this->name,
             'description' => $this->description,
+            'nodes' => $this->nodes,
         ];
     }
 }
