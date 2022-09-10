@@ -18,7 +18,7 @@ class NodeResource extends JsonResource
             'id' => $this->id,
             'graph_id' => $this->graph_id,
             'childs' => NodeResource::collection($this->childs),
-            'parents' => NodeResource::collection($this->parents)
+            //'parents' => NodeResource::collection($this->parents)
         ];
     }
 }

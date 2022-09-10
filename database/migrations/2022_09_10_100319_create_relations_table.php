@@ -16,6 +16,8 @@ class CreateRelationsTable extends Migration
         Schema::create('relations', function (Blueprint $table) {
             $table->foreignId('parent_node_id')->references('id')->on('nodes');
             $table->foreignId('child_node_id')->references('id')->on('nodes');
+
+            $table->unique(['parent_node_id', 'child_node_id']);
         });
     }
 

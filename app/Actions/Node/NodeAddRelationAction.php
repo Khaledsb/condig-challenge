@@ -6,6 +6,7 @@ use App\Http\Requests\Node\AddRelationNodeRequest;
 use App\Models\Node;
 
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class NodeAddRelationAction
 {
@@ -20,6 +21,10 @@ class NodeAddRelationAction
         // Validate inputs
         $data = $request->validated();
 
+        $res = DB::table('relations')->where('parent_node_id', $data['parent_node_id'])->where('child_node_id', $data['child_node_id'])->get();
+
+        if( !$res->isEmpty()) throw new Exception('Relation already exists');
+        
         $node_parent = Node::find($data['parent_node_id']);
         $node_child = Node::find($data['child_node_id']);
 

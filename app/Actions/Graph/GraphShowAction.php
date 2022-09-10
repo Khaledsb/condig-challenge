@@ -5,6 +5,7 @@ namespace App\Actions\Graph;
 use App\Http\Requests\ShowGraphRequest;
 use App\Models\Graph;
 use Exception;
+use Illuminate\Support\Collection;
 
 class GraphShowAction
 {
@@ -22,6 +23,13 @@ class GraphShowAction
 
         $graph = Graph::with('nodes')->where('id', $data['id'])->first();
 
+        // $graph = Graph::whereHas('nodes' , function($query) {
+        //     $query->with('childs');
+        // })->whereHas('nodes' , function($query) {
+        //     $query->with('parents');
+        // })->where('id', $data['id'])->first();
+
+        //dd($graph);
         if (!$graph) throw new Exception('Graph not found or deleted');
 
         return  $graph;

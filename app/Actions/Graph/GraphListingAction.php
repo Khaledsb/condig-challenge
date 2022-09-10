@@ -16,9 +16,9 @@ class GraphListingAction {
      */
     public function execute(IndexGraphRequest $request) : Collection
     {
-        $graphs = Graph::whereHas('nodes' , function($query) {
+        $graphs = Graph::with(['nodes' => function($query) {
             $query->with('childs');
-        })->whereHas('nodes' , function($query) {
+        }])->with('nodes' , function($query) {
             $query->with('parents');
         })->get();
 
