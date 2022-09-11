@@ -21,10 +21,8 @@ class AddNodeToGraphAction
         // Validate inputs
         $data = $request->validated();
 
-        $node = Node::where('id', $data['node_id'])->first();
-       
+        $node = Node::create();
         $node->setGraph($data['graph_id']);
-
         $node->save();
        
         return $node;

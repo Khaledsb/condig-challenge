@@ -21,15 +21,17 @@ class GraphShowAction
         // Validate inputs
         $data = $request->validated();
 
-        $graph = Graph::with('nodes')->where('id', $data['id'])->first();
+        //$graph = Graph::with('nodes')->withCount('nodes')->where('id', $data['id'])->first();
 
-        // $graph = Graph::whereHas('nodes' , function($query) {
-        //     $query->with('childs');
-        // })->whereHas('nodes' , function($query) {
-        //     $query->with('parents');
-        // })->where('id', $data['id'])->first();
+   
+        $graph = Graph::whereHas('nodes' , function($query) {
+            $query->with('childs');
+            //->withCount('childs');
+        })->withCount('nodes')->whereHas('nodes' , function($query) {
+            $query->with('parents');
+        })->where('id', $data['id'])->first();
 
-        //dd($graph);
+       // dd($graph);
         if (!$graph) throw new Exception('Graph not found or deleted');
 
         return  $graph;

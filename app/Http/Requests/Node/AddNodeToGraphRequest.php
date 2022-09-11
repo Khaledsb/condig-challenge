@@ -26,7 +26,6 @@ class AddNodeToGraphRequest extends FormRequest
     public function rules()
     {
         return [
-            'node_id' => 'required|exists:nodes,id',
             'graph_id' => 'required|exists:graphs,id',
         ];
     }
@@ -44,17 +43,5 @@ class AddNodeToGraphRequest extends FormRequest
         throw (new ValidationException($validator))
             ->errorBag($this->errorBag)
             ->redirectTo($this->getRedirectUrl());
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'node_id' => request()->route('node'),
-        ]);
     }
 }
