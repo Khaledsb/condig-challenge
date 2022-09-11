@@ -18,8 +18,10 @@ class GraphUpdateAction {
         // Validate inputs
         $data = $request->validated();
 
+        //get current graph
         $graph = Graph::where('id', $data['id'])->firstOrFail();
 
+        //update graph
         $graph->update($data);
         $graph->save();
 

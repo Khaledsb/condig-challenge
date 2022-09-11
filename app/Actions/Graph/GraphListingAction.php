@@ -16,11 +16,11 @@ class GraphListingAction {
      */
     public function execute(IndexGraphRequest $request) : Collection
     {
+        //get all graphs with relationships
         $graphs = Graph::with(['nodes' => function($query) {
             $query->with('childs');
-        }])->with('nodes' , function($query) {
             $query->with('parents');
-        })->get();
+        }])->withCount('nodes')->get();
 
         return $graphs;
     }

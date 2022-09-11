@@ -21,6 +21,7 @@ class NodeDestroyAction
         // Validate inputs
         $data = $request->validated();
 
+        //get current node
         $node = Node::where('id', $data['id'])->first();
 
         if ($node) {

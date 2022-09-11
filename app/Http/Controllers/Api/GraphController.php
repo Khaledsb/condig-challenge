@@ -31,6 +31,13 @@ class GraphController extends Controller
         return response()->json(GraphResource::collection($graphs), Response::HTTP_OK);
     }
 
+    /**
+     * Store a new graph
+     *
+     * @param  StoreGraphRequest  $request
+     * @param  GraphStoreAction  $action
+     * @return \Illuminate\Http\Response
+     */
     public function store(StoreGraphRequest $request, GraphStoreAction $action)
     {
         try {
@@ -95,8 +102,9 @@ class GraphController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * Display a detail of the resource.
+     * @param ShowGraphRequest $request
+     * @param GraphShowAction $action
      * @return \Illuminate\Http\Response
      */
     public function show(ShowGraphRequest $request, GraphShowAction $action)

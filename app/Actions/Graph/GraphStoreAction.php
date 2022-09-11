@@ -19,6 +19,7 @@ class GraphStoreAction
         // Validate inputs
         $data = $request->validated();
 
+        //create new graph
         return Graph::create($data);
     }
 }

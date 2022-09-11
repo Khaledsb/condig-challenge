@@ -3,7 +3,6 @@
 namespace App\Actions\Node;
 
 use App\Http\Requests\Node\AddNodeToGraphRequest;
-use App\Models\Graph;
 use App\Models\Node;
 
 use Exception;
@@ -21,11 +20,13 @@ class AddNodeToGraphAction
         // Validate inputs
         $data = $request->validated();
 
+        //create new node
         $node = Node::create();
+
+        //associate node with graph
         $node->setGraph($data['graph_id']);
         $node->save();
-       
-        return $node;
 
+        return $node;
     }
 }

@@ -66,6 +66,9 @@ class GraphGen extends Command
                         Node::where('id', random_int($existingNodeRecords + 1, $existingNodeRecords + 10))->get()
                     );
                 });
+
+            $this->info('Graph and nodes are created successfully : ');
+            $this->info('Graph ID : '. $graph->id);
         }
     }
 }

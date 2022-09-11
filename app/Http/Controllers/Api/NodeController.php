@@ -10,13 +10,18 @@ use App\Http\Requests\Node\AddNodeToGraphRequest;
 use App\Http\Requests\Node\AddRelationNodeRequest;
 use App\Http\Requests\Node\DeleteNodeRequest;
 use App\Http\Resources\NodeResource;
-use App\Http\Resources\RelationResource;
 use Dotenv\Exception\ValidationException;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class NodeController extends Controller
 {
+    /**
+     * add relation between two nodes
+     *
+     * @param AddRelationNodeRequest $request
+     * @param NodeAddRelationAction $action
+     * @return \Illuminate\Http\Response
+     */
     public function addRelation(AddRelationNodeRequest $request, NodeAddRelationAction $action)
     {
         try {
@@ -33,6 +38,13 @@ class NodeController extends Controller
         }
     }
 
+    /**
+     * add node to graph
+     *
+     * @param AddNodeToGraphRequest $request
+     * @param AddNodeToGraphAction $action
+     * @return \Illuminate\Http\Response
+     */
     public function addToGraph(AddNodeToGraphRequest $request, AddNodeToGraphAction $action)
     {
         try {
@@ -52,8 +64,8 @@ class NodeController extends Controller
     /**
      * deleting a resource in database.
      *
-     * @param DeleteGraphRequest $request
-     * @param GraphDestroyAction $action
+     * @param DeleteNodeRequest $request
+     * @param NodeDestroyAction $action
      * @return \Illuminate\Http\Response
      */
     public function delete(DeleteNodeRequest $request, NodeDestroyAction $action)

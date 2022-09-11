@@ -10,7 +10,7 @@ class GraphDestroyAction
 {
 
     /**
-     * Handle graph listing  request
+     * Handle graph delete  request
      *
      * @param DeleteGraphRequest $request
      * @return Graph
@@ -20,8 +20,10 @@ class GraphDestroyAction
         // Validate inputs
         $data = $request->validated();
 
+        //get graph
         $graph = Graph::where('id', $data['id'])->first();
 
+        //delete graph from graphs table if existing
         if ($graph) {
             $graph->delete();
         } else {
